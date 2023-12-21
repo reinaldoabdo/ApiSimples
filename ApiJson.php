@@ -49,9 +49,19 @@ class ApiJson
         }
     }
 
+
     public function call()
     {
         try {
+            spl_autoload_register(function ($className) {
+                $filePath = str_replace('\\', '/', $className) . '.php';
+                if (file_exists($filePath)) {
+                    include_once $filePath;
+                } else {
+                    throw new Exception('Classe não encontrada em: ' . $filePath);
+                }
+            });
+
             $class = new $this->class();
             $return = $class->{$this->method}($this->params);
             return $return;
