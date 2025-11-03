@@ -74,14 +74,10 @@ class ApiJson
 //inicio
 ob_start('ob_gzhandler');
 
-$header = "
-    'Content-Type: application/json'
-    'Access-Control-Allow-Origin: *'
-    'Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE'
-    'Encoding: utf-8'
-    'Accept-Encoding: gzip'
-";
-header($header);
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 $json = file_get_contents('php://input');
 try {
